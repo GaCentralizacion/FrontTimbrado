@@ -1,0 +1,39 @@
+<div ng-init="init()">
+    <!--Inicia Desbloqueo  -->
+            <div class="col-md-12">
+                <div class="row">                    
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label">Empresa:</label>
+                                    <select class="form-control" ng-model="tipoEmpresa.idEmpresa" ng-options="empresa.idEmpresa as empresa.nombreEmpresa for empresa in empresaUsuario" name="txtTipoContrato"  ng-disabled="CanceladoPendiente">
+                                        <option value="">Seleccioné Empresa</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label">Tipo Nómina:</label>
+                                    <select class="form-control" ng-model="tipoNomina.idTipoNomina" ng-options="tipoNomina.idTipoNomina as tipoNomina.nomTipoNomina for tipoNomina in tipoNomina" name="txtTipoContrato" ng-disabled="CanceladoPendiente">
+                                        <option value="">Seleccioné Tipo Nómina</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label">Carpeta:</label>  
+                                 
+                                    <!-- <md-datepicker ng-model="date" md-placeholder="Enter date"></md-datepicker>     -->
+                                     <input  class="form-control"  type="date" ng-change='change()' ng-model="date" placeholder="ddmmyyyy"/>           
+                                     <!-- <input class="form-control" type="text" ng-change="Fecha()" ng-model="date" placeholder="ddmmyyyy"/>  -->
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div   style="margin-top: 25px" class="form-group"  ng-show="desbloqueo">
+                                  <button class="btn btn-w-m btn-danger " ng-click="realizarDesbloqueo(tipoEmpresa.idEmpresa,tipoNomina.idTipoNomina)">Desbloquear</button>
+                                </div>
+                            </div>
+                            
+                </div>
+            </div>
+</div>

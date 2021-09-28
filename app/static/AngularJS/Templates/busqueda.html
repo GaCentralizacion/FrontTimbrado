@@ -1,0 +1,263 @@
+﻿<div ng-init="init()">
+    <!--Inicia busqueda  -->
+    <div class="">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-label">Grupo:</label>
+                        <select class="form-control" ng-model="filtros.idTipoGrupo" ng-options="tipoGrupo.idGrupo as tipoGrupo.nombreGrupo for tipoGrupo in grupo" name="txtTipoContrato" ng-change="getEmpresa(filtros.idTipoGrupo)">
+                            <option value="">Seleccioné Grupo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-label">Empresa:</label>
+                        <select class="form-control" ng-model="filtros.idTipoEmpresa" ng-options="empresa.idEmpresa as empresa.nombreEmpresa for empresa in empresaUsuario" name="txtTipoContrato" ng-change="cargaTipoAgencia(filtros.idTipoEmpresa);activaPeriodo(filtros.idTipoEmpresa);" ng-disabled="activarInputEmpresa">
+                            <option value="">Seleccioné Empresa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Nómina:</label>
+                        <select class="form-control" ng-model="filtros.idTipoNomina" ng-options="tipoDeNomina.idTipoNomina as tipoDeNomina.nomTipoNomina for tipoDeNomina in tipoNomina" name="txtTipoContrato" ng-change="cargaYears(filtros.idTipoNomina)" ng-disabled="activarInputTipoNomina">
+                            <option value="">Seleccioné el tipo de nómina</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-label">Año:</label>
+                        <select class="form-control" ng-model="filtros.year" ng-options="year.yearNomina as year.yearNomina for year in years" name="txtTipoContrato" ng-change="cargaPeriodos(filtros.idTipoNomina,filtros.idTipoEmpresa,filtros.year);" ng-disabled="activarYear">
+                            <option value="">Seleccioné Año</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-label">Periodo:</label>
+                        <select class="form-control" ng-model="filtros.periodo" ng-options="periodo.namePeriodo as periodo.namePeriodo for periodo in Periodos" name="txtTipoContrato" ng-disabled="activarPeriodo" ng-change="verificaFecha(filtros);cargaDepartamentos(filtros.idTipoEmpresa,filtros.periodo);">
+                            <option value="">Seleccioné Periodo</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-label">Departamento:</label>
+                        <select class="form-control" ng-model="filtros.departamento" ng-options="departamento.Departamentoxml as departamento.Departamentoxml for departamento in departamentos" name="txtTipoContrato" ng-change="verificaFechaDepto(filtros);cargaPuestos(filtros.idTipoEmpresa,filtros.periodo, filtros.departamento)" ng-disabled="activarInputDepartamento">
+                            <option value="">Seleccioné Departamento</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-label">Puesto:</label>
+                        <select class="form-control" ng-model="filtros.idDepartamento"
+                         ng-options="puesto.Puestoxml as puesto.Puestoxml for puesto in puestos" name="txtTipoContrato" ng-change="verificaFechaPuesto(filtros)" ng-disabled="activarPuesto">
+                            <option value="">Seleccioné puesto</option>
+                        </select>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <!--h5>Búsqueda Clientes <small> Factura / Pedido / Cotizaciones</small></h5-->
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class=""></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <br>
+                <div class="col-sm-12">
+                    <!-- tabs inicio-->
+                    <ul class="nav nav-pills newcolor">
+                        <li ng-class="panels[0].className" ng-click="setActiveClass(panels[0])"><a href="#">{{panels[0].name}}</a></li>
+                        <li ng-class="panels[1].className" ng-click="setActiveClass(panels[1])"><a href="#">{{panels[1].name}}</a></li>
+                    </ul>
+                    <!-- tabs Fin-->
+                    <!-- tabContent1 Ini-->
+                    <div ng-show="panels[0].active">
+                        <br>
+                        <!-- tabla lotes no Aplicado -->
+                        <div class="row">
+                            <div class="col-sm-12" name="todo">
+                                <table id="tblTimbradoExitoso" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>No. de empleado</th>
+                                            <th>Nombre de Empleado</th>
+                                            <th>Empresa</th>
+                                            <th>Departamento</th>
+                                            <th>Puesto</th>
+                                            <th>Tipo de Nómina</th>
+                                            <th>Documento</th>
+                                            <th ng-show="mostrarTodos">Seleccionar</th>
+                                            <!-- <th>Recibo</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="timbrado in timbrados | filter:{estatusTimbrado : 100} ">
+                                            <td style="font-family: sans-serif !important">{{timbrado.idEmpleado}}</td>
+                                            <td style="font-family: sans-serif !important">{{timbrado.nombreEmpleado}}</td>
+                                            <td style="font-family: sans-serif !important">{{timbrado.nombreEmpresa}}</td>
+                                            <td style="font-family: sans-serif !important">{{timbrado.nombreDepartamento}}</td>
+                                            <td style="font-family: sans-serif !important">{{timbrado.nombrePuesto}}</td>
+                                            <td style="font-family: sans-serif !important">{{timbrado.descripcionNomina}}</td>
+                                            <td style="font-family: sans-serif !important">{{timbrado.nombreRecibo}}</td>
+                                            <td style="text-align: center;" ng-show="mostrarTodos">
+                                                <input type="checkbox" ng-model="timbrado.check" ng-checked="{{timbrado.check}}">
+                                            </td>
+                                            <!-- <td></td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- tabla lotes no Aplicado  FIN-->
+                    </div>
+                     <br/>
+                    <div class="row " ng-show="panels[0].active">
+
+                    <div class="row col-sm-12">
+                        <div class="col-md-10 col-md-offset-2" ng-show="mostrarTodos" style="text-align: right;">
+                            <button ng-click="seleccionarDocumentosTodo(timbrados)" class="btn btn-primary">Seleccionar Todo</button>
+                        </div>
+
+                        <div class="col-md-10 col-md-offset-2" ng-show="mostrarIndi" style="text-align: right;">
+                            <button ng-click="seleccionarDocumentos()" class="btn btn-success">Seleccionar individual</button>
+                        </div>
+                         <br/>
+                    </div>
+                     <br/>
+                      <br/>
+                      <br/>
+                        <div class="col-md-8 col-md-offset-4" ng-show="enviarTodo == true" style="text-align: right;">
+                            <button type="button " class="btn btn-w-m btn-warning " data-toggle="modal" data-target="#modalLotes">Enviar por Correo</button>
+                            <button type="button " class="btn btn-w-m btn-danger" ng-click="imprimirDocumentosPdfs(timbrados)">Enviar a Imprimir</button>
+                        </div>
+                        <div class="col-md-7 col-md-offset-5" ng-show="enviarTodo == false" style="text-align: right;"> 
+                        
+                            <button type="button " class="btn btn-w-m btn-warning " data-toggle="modal" data-target="#modalTodoscorreo">Enviar todo por Correo</button>
+                            <button type="button " class="btn btn-w-m btn-danger" ng-click="imprimirPdfs()">Enviar todo a Imprimir</button>
+                        </div>
+                    </div>
+                    <!-- tabContent1 Fin-->
+                    <!-- tabContent1 Ini-->
+                    <div ng-show="panels[1].active ">
+                        <br>
+                        <!-- tabla lotes no Aplicado -->
+                        <div class="row ">
+                            <div class="col-sm-12 ">
+                                <table id="tblSinTimbrar" class="table table-striped table-bordered ">
+                                    <thead>
+                                        <tr>
+                                            <th>No. de empleado</th>
+                                            <th>Nombre de Empleado</th>
+                                            <th>Empresa</th>
+                                            <th>Agencia</th>
+                                            <th>Departamento</th>
+                                            <th>Tipo de Nómina</th>
+                                            <th>Documento</th>
+                                            <th>Estatus</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="notimbra in sinTimbrar | filter:{estatusTimbrado: '!100'} ">
+                                            <td style="font-family: sans-serif !important">{{notimbra.idEmpleado}}</td>
+                                            <td style="font-family: sans-serif !important">{{notimbra.nombreEmpleado}}</td>
+                                            <td style="font-family: sans-serif !important">{{notimbra.nombreEmpresa}}</td>
+                                            <td style="font-family: sans-serif !important">{{notimbra.nombreSucursal}}</td>
+                                            <td style="font-family: sans-serif !important">{{notimbra.nombreDepartamento}}</td>
+                                            <td style="font-family: sans-serif !important">{{notimbra.descripcionNomina}}</td>
+                                            <td style="font-family: sans-serif !important">{{notimbra.nombreRecibo}}</td>
+                                            <td style="font-family: sans-serif !important">{{notimbra.descripcionTimbrado}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- tabla lotes no Aplicado  FIN-->
+                    </div>
+
+                </div>
+            </div>
+            <!-- div tabs end -->
+        </div>
+    </div>
+    <!-- Terminan tabs -->
+    <!-- Inician botones -->
+
+    <!-- Terminan botones -->
+</div>
+
+<div class="modal fade" id="modalLotes">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Enviar por Correo</h4>
+            </div>
+            <div class="modal-body" style="height: 100px ">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class="form-label">Correo Electrónico:</label>
+                        <input type="text" type="email" class="form-control" placeholder="ej. ejemplo@correo.com" ng-model="filtro.correo" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row modal-footer">
+                <div  class="col-sm-8"></div>
+                <div  class="col-sm-4">
+                    <button type="button" class="btn btn-secondary " data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary " ng-click="enviarCorreo(timbrados,filtro.correo) ">Enviar</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div class="modal fade" id="modalTodoscorreo">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Enviar por Correo</h4>
+            </div>
+            <div class="modal-body" style="height: 100px">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class="form-label">Correo Electrónico:</label>
+                        <input type="text" type="email" class="form-control" placeholder="ej. ejemplo@correo.com" ng-model="filtro.correoTodo " required>
+                    </div>
+                </div>
+            </div>
+            <div class="row modal-footer">
+                <div  class="col-sm-8"></div>
+                <div  class="col-sm-4">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" ng-click="enviarTodosCorreo(filtro.correoTodo)">Enviar</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

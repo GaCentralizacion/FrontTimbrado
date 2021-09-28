@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cfdi:Comprobante Version="3.3" Serie="002" Folio="1" Fecha="2020-02-29T10:53:11" Sello="T7QcpmhqE8vc09eVwWWWBVUOEikDFjiHPKhPfG36Xrf2uUqSW8INuVGsdZBQohkoDeqpz5soYcDdsrXSRsghrTJmKpOCaSlIGxGDueLbhnWwAzrlOfR1xB0fJDWpdJbISoPcMUy/4+hHzGlKFngRoKsnk0PdB24oMMPSYgf7G38868+2hScAAJaUR2AsNfHvVy7kMxcFCveZFfN3bUda+xEyCfmipb3EJHhIm7IKKFZ7vdRjo8Zr8tutlJyb/ac2WDOx+adkWnbTNi4JjVeMBiALe/BkoZ4iaMg0zBx/ohCsD8apNARkPB7FWpQSfdTfRPKKTu6Lb1As+nCWAY/HYw==" FormaPago="99" NoCertificado="00001000000413988765" Certificado="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" SubTotal="2572.00" Descuento="772.00" Moneda="MXN" Total="1800.00" TipoDeComprobante="N" MetodoPago="PUE" LugarExpedicion="01900" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/nomina12 http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina12.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:nomina12="http://www.sat.gob.mx/nomina12">
+  <cfdi:Emisor Rfc="SCA991208MK4" Nombre="SERVICIOS DE CONTRALORIA, ADMON Y DE PERSONAL, S DE RL DE CV" RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="PEAJ850604EK4" Nombre="PEDRAZA AYALA, JUAN CARLOS" UsoCFDI="P01" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="1" Descripcion="Pago de nómina" ValorUnitario="2572.00" Importe="2572.00" Descuento="772.00" ClaveProdServ="84111505" ClaveUnidad="ACT" />
+  </cfdi:Conceptos>
+  <cfdi:Complemento>
+    <nomina12:Nomina Version="1.2" TipoNomina="O" FechaPago="2019-02-19" FechaInicialPago="2019-01-12" FechaFinalPago="2019-02-15" NumDiasPagados="35.000" TotalPercepciones="2572.00" TotalDeducciones="772.00" TotalOtrosPagos="0.00">
+      <nomina12:Emisor RegistroPatronal="Y6436823105">
+      </nomina12:Emisor>
+      <nomina12:Receptor Curp="PEAJ850604HDFDYN09" NumSeguridadSocial="45058527602" FechaInicioRelLaboral="2005-07-21" Antigüedad="P708W" TipoContrato="01" Sindicalizado="No" TipoJornada="01" TipoRegimen="02" NumEmpleado="508343" Departamento="S - ANDRADE ZARAGOZA SERVICIO" Puesto="TECNICO DE SERVICIO" RiesgoPuesto="3" PeriodicidadPago="05" Banco="012" CuentaBancaria="1567068654" SalarioBaseCotApor="0.00" SalarioDiarioIntegrado="0.00" ClaveEntFed="DIF">
+        <nomina12:SubContratacion RfcLabora="AAN841022G20" PorcentajeTiempo="100.000" />
+      </nomina12:Receptor>
+      <nomina12:Percepciones TotalSueldos="2572.00" TotalGravado="0.00" TotalExento="2572.00">
+        <nomina12:Percepcion TipoPercepcion="029" Clave="601,74" Concepto="Vales de despensa Exento" ImporteGravado="0.00" ImporteExento="2572.00">
+        </nomina12:Percepcion>
+      </nomina12:Percepciones>
+      <nomina12:Deducciones TotalOtrasDeducciones="772.00">
+        <nomina12:Deduccion TipoDeduccion="007" Clave="2100-0002-0001-" Concepto="Total de Pensiones Alimenticias" Importe="772.00" />
+      </nomina12:Deducciones>
+      <nomina12:OtrosPagos>
+        <nomina12:OtroPago TipoOtroPago="002" Clave="601,3" Concepto="Exceso de Subsidio al empleo" Importe="0.00">
+          <nomina12:SubsidioAlEmpleo SubsidioCausado="0.00" />
+        </nomina12:OtroPago>
+      </nomina12:OtrosPagos>
+    </nomina12:Nomina>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

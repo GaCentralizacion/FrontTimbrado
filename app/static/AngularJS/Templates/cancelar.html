@@ -1,0 +1,53 @@
+<div ng-init="init()">
+    <!--Inicia Cancelacion  -->
+            <div class="col-md-12">
+                <div class="row">                    
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Empresa:</label>
+                                    <select class="form-control" ng-model="tipoEmpresa.idTipoEmpresa" ng-options="empresa.idEmpresa as empresa.nombreEmpresa for empresa in empresaUsuario" name="txtTipoContrato"  ng-change="cargaDocTipoContrato(nuevoContrato)"  ng-disabled="CanceladoPendiente">
+                                        <option value="">Seleccioné Empresa</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Tipo Nómina:</label>
+                                    <select class="form-control" ng-model="tipoNomina.idTipoNomina" ng-options="tipoNomina.idTipoNomina as tipoNomina.nomTipoNomina for tipoNomina in tipoNomina" name="txtTipoContrato"  ng-change="cargaDocTipoContrato(nuevoContrato)" ng-click="getFileTree(tipoEmpresa.idTipoEmpresa,tipoNomina.idTipoNomina)" ng-disabled="CanceladoPendiente">
+                                        <option value="">Seleccioné Tipo Nómina</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <!-- <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button class="btn btn-primary" ng-click="getFileTree()">Mostrar Carpetas</button>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <div class="col-lg-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <!-- Árbol de XML a Cancelar F:\TimbradoNominaParaRH\XCancelar -->
+                    Árbol de Carpetas a Cancelar
+                </div>
+                <div class="panel-body" ng-show="yo" ng-disabled="CanceladoPendiente">
+                    <ul ng-repeat="filetreed in filetree" style="background-color:white;" id="menu_arbol">
+                        <li id="padre" style="display: block; text-decoration: none;" ><a style="cursor:pointer; color:black" ng-click="seleccionarCancelacion(filetreed.datos);ruta(filetreed.datos)"><span class="glyphicon glyphicon-folder-open"></span>  {{filetreed.datos.name}}</a>
+                            <ul id="{{filetreed.datos.name}}" ng-repeat="filetreechildren in filetreed.datos.children" style="background-color:white">
+                                <li id="{{filetreed.datos.name}}" style="display: block; text-decoration: none;">
+                                <a style="cursor:pointer; color:black" ng-click="seleccionarTimbre(filetreed.datos)"><span class=" glyphicon glyphicon-list-alt "></span>  {{filetreechildren.name}}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div style="margin-left: 55%; margin-bottom: 15px" ng-show="cancelar">
+                    Carpeta Seleccionada: {{directorio}} <button class="btn btn-w-m btn-danger" ng-click="realizarCancelacion()" ng-disabled="CanceladosPendientes">Enviar a Cancelar</button>
+                </div>
+                <div style="color:white; margin-left: 10px" ng-show="cancelar" >.</div> 
+            </div>
+        </div>
+</div>

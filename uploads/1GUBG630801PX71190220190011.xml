@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cfdi:Comprobante Version="3.3" Serie="002" Folio="1" Fecha="2020-02-29T10:53:11" Sello="ACoL4Rt/Ey7iITsbHhjJMwcKbE2EKHcjO+RCCQ00bIbAikHxDdxalZCSIt3ZgPlrVMXzzEEVhVAak88hxBwY99cH4yFxg+JVLF1Ncoll7EbISKps9uFE8vmI9AbqmrvlU/T626wuVKoO7FJS5LDIhnMduE3n/1/6B/1vpzJt0mgbFknAof3klGXvQPgyMB4nOlcxxg4v+MbYfTZhhfkryOLYNDVY14abFg2shAIlfLbw/46ovRFZ94SYAsH70Ic0RX5JWkSukawgCSB3ZaHaArYsVspgHCOWVP/2ANYaiU5U4h4tqD1ArjgbVufVuqh4LR0ChqAlPEG8641iJqgQkg==" FormaPago="99" NoCertificado="00001000000413988765" Certificado="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" SubTotal="3093.00" Moneda="MXN" Total="3093.00" TipoDeComprobante="N" MetodoPago="PUE" LugarExpedicion="01900" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/nomina12 http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina12.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:nomina12="http://www.sat.gob.mx/nomina12">
+  <cfdi:Emisor Rfc="SCA991208MK4" Nombre="SERVICIOS DE CONTRALORIA, ADMON Y DE PERSONAL, S DE RL DE CV" RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="GUBG630801PX7" Nombre="GUZMAN BARCENAS, GERARDO" UsoCFDI="P01" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="1" Descripcion="Pago de nómina" ValorUnitario="3093.00" Importe="3093.00" ClaveProdServ="84111505" ClaveUnidad="ACT" />
+  </cfdi:Conceptos>
+  <cfdi:Complemento>
+    <nomina12:Nomina Version="1.2" TipoNomina="O" FechaPago="2019-02-19" FechaInicialPago="2019-01-12" FechaFinalPago="2019-02-15" NumDiasPagados="35.000" TotalPercepciones="3093.00" TotalOtrosPagos="0.00">
+      <nomina12:Emisor RegistroPatronal="Y6436823105">
+      </nomina12:Emisor>
+      <nomina12:Receptor Curp="GUBG630801HDFZRR06" NumSeguridadSocial="17856321041" FechaInicioRelLaboral="1989-01-31" Antigüedad="P1567W" TipoContrato="01" Sindicalizado="No" TipoJornada="01" TipoRegimen="02" NumEmpleado="508324" Departamento="S- AUTOMOVILISTICA ANDRADE SERVICIO" Puesto="JEFE DE TALLER" RiesgoPuesto="3" PeriodicidadPago="05" Banco="012" CuentaBancaria="1567068379" SalarioBaseCotApor="0.00" SalarioDiarioIntegrado="0.00" ClaveEntFed="DIF">
+        <nomina12:SubContratacion RfcLabora="AAN841022G20" PorcentajeTiempo="100.000" />
+      </nomina12:Receptor>
+      <nomina12:Percepciones TotalSueldos="3093.00" TotalGravado="390.00" TotalExento="2703.00">
+        <nomina12:Percepcion TipoPercepcion="029" Clave="601,15" Concepto="Vales de despensa Gravable" ImporteGravado="390.00" ImporteExento="0.00">
+        </nomina12:Percepcion>
+        <nomina12:Percepcion TipoPercepcion="029" Clave="601,74" Concepto="Vales de despensa Exento" ImporteGravado="0.00" ImporteExento="2703.00">
+        </nomina12:Percepcion>
+      </nomina12:Percepciones>
+      <nomina12:OtrosPagos>
+        <nomina12:OtroPago TipoOtroPago="002" Clave="601,3" Concepto="Exceso de Subsidio al empleo" Importe="0.00">
+          <nomina12:SubsidioAlEmpleo SubsidioCausado="0.00" />
+        </nomina12:OtroPago>
+      </nomina12:OtrosPagos>
+    </nomina12:Nomina>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

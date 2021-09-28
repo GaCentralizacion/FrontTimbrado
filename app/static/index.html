@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Portal de Timbrado</title>
+    <meta name="description" content="description project">
+    <meta name="author" content="name" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Hojas de estilos-->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/toastr.css" rel="stylesheet" />
+    <link href="css/custom-style.css" rel="stylesheet" />
+    <link href="datatables.min.css" rel="stylesheet" /> 
+   
+    <!--js-->
+   
+    
+    <script src="js/libs/jQuery/jquery-2.1.4.min.js"></script>
+    <script src="js/libs/dataTable/datatables.min.js"></script>
+    <script src="js/libs/bootstrap/bootstrap.js"></script>
+    <link href="css/navBar.css" rel="stylesheet" />
+    <link href="css/jsTree/style.min.css" rel="stylesheet" />
+     <link href="css/dropzone.css" rel="stylesheet" />
+
+</head>
+
+<body ng-app="registrationModule" style="background:#EAEAEA">
+    <div id="pnlSideNav" class="sidenav" ng-show="mostrarMenu">
+        <div class="pnlSideTitleMin">
+            <p id="siglas">GA</p>
+            <img alt="image" id="logoo" src="/images/logoA.png" style="width:120px; height:60px"/>
+        </div>
+        <div id="mainnav-profile">
+            <div class="profile-wrap" id="divUserSession">
+                <div class="pad-btm">
+                </div>
+                <div class="main">
+                    <input type="hidden" id="lgnUser" value="[[ user.idUsuario ]]">
+                </div>
+                <br/>
+            </div>
+        </div>
+        <a href="/timbrado{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="Timbrado" style="font-family:Helvetica;" ng-show="menuTimbrado">
+            <i class="glyphicon glyphicon-list-alt"></i>
+            <span class="menu-title">
+                <strong>Timbrado</strong>
+            </span>
+        </a>
+        <a href="/busqueda{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="TimbradoBusqueda" style="font-family:Helvetica;" ng-show="menuBusqueda">
+            <i class="glyphicon glyphicon-search"></i>
+            <span class="menu-title">
+                <strong>Búsqueda</strong>
+            </span>
+        </a>
+        <a href="/cancelar{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="Cancelar" style="font-family:Helvetica;" ng-show="menuCancelar">
+            <i class="glyphicon glyphicon-remove-circle"></i>
+            <span class="menu-title">
+                <strong>Cancelación</strong>
+            </span>
+        </a>
+        <a href="/conciliacion{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="Conciliación" style="font-family:Helvetica;" ng-show="menuConciliacion">
+            <i class="glyphicon glyphicon-duplicate"></i>
+            <span class="menu-title">
+                <strong>Conciliación</strong>
+            </span>
+        </a>
+        <a href="/desbloqueo{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="Desbloqueo" style="font-family:Helvetica;" ng-show="menuDesbloqueo">
+            <i class="glyphicon glyphicon-ban-circle"></i>
+            <span class="menu-title">
+                <strong>Desbloqueo</strong>
+            </span>
+        </a>
+    </div>
+    <div id="pnlMain">
+        <div class="panelTopBar"  ng-show="mostrarMenu">
+            <div class="pnlBodyBar">
+                <button type="button" class="btn btn-default" onclick="openCloseNav()"><span class="glyphicon glyphicon-menu-hamburger"></span></button>&nbsp;&nbsp;
+                 
+                <strong> &nbsp;&nbsp; PORTAL DE TIMBRADO</strong>
+            </div>
+            <div class="pnlBodyBar pull-right" style="margin-right: 10px;font-family:Helvetica; margin-right: 6px;font-size: 15px !important">
+                <ul class="nav navbar-nav navbar-right" style="margin-top: 0px; padding:0px 5px 20px">
+                    <li><a href="" style="color:#333333;"> {{datosUsuario[0].nombreUsuario}}</a></li>
+                    <li><a href="/hhh" style="color:#333333; font-size: 17px !important"><span class="glyphicon glyphicon-user"> Salir</span></a></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        <div ng-view ></div>
+    </div>
+    <style type="text/css">
+        body {
+   overflow-x: hidden;
+}
+    </style>
+    <!--Interface de usuario-->
+    <script src="js/libs/toastr/toastr.min.js"></script>
+    <!-- Librerias Angular-->
+    <script src="js/libs/angular/angular.min.js"></script>
+    <script src="js/libs/angular/angular-route.min.js"></script>
+    <script src="js/libs/angular/angular-local-storage.min.js"></script>
+    <script src="js/libs/navBar.js"></script>
+    <script src="js/libs/jsTree/jstree.min.js"></script>
+    <script src="js/libs/dropzone.min.js"></script>
+    <!--Funciones Comunes-->
+    <script src="confront.js"></script>
+    <script src="helpers.js"></script>
+    <!--Librerias de aplicación angular-->
+    <script src="AngularJS/registrationModule.js"></script>
+    <!--librerias de componenetes-->
+    <script src="AngularJS/alertFactory.js"></script>
+    <!--Controllers-->
+    <script src="AngularJS/Busqueda/busquedaController.js"></script>
+    <script src="AngularJS/Busqueda/busquedaRepository.js"></script>
+    <script src="AngularJS/Timbrado/timbradoController.js"></script>
+    <script src="AngularJS/Timbrado/timbradoRepository.js"></script>
+    <script src="AngularJS/Cancelar/cancelarController.js"></script>
+    <script src="AngularJS/Cancelar/cancelarRepository.js"></script>
+    <script src="AngularJS/Conciliacion/conciliacionController.js"></script>
+    <script src="AngularJS/Conciliacion/conciliacionRepository.js"></script>
+    <script src="AngularJS/Desbloqueo/desbloqueoController.js"></script>
+    <script src="AngularJS/filtros/filtrosRepository.js"></script>
+    <script src="AngularJS/FileTree/filetreeRepository.js"></script>
+    <script src="AngularJS/login/loginController.js"></script>
+    <script src="AngularJS/login/loginRepository.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+.nav-orders {
+    width: 100%;
+}
+@media (min-width: 768px) {}
+.nav-orders button {
+    width: 50%;
+}
+.social-body img {
+    width: 100%;
+    height: 250px;
+}
+.navbar-right {
+    float: right!important;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    text-align: center;
+}
+.cc-selector {
+    text-align: center;
+}
+.cc-selector input {
+    margin: 0;
+    padding: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.banamex {
+    background-image: url(/image/bancos/banamex_logo.jpg);
+}
+.bancomer {
+    background-image: url(/image/bancos/bancomer_logo.jpg);
+}
+.santander {
+    background-image: url(/image/bancos/santander_logo.jpg);
+}
+.cc-selector input:active +.bank-cc {
+    opacity: .9;
+}
+.cc-selector div {
+    text-align: center;
+    display: inline-block;
+    margin: 2em;
+}
+.bank-cc {
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 200px;
+    height: 56px;
+}
+.bank-cc:hover {
+    -webkit-filter: none;
+    -moz-filter: none;
+    filter: none;
+    box-shadow: 10px 10px 5px #888888;
+}
+.nav-header img {
+    max-width: 120px;
+    max-height: 120px;
+}
+img.circle-border {
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+}
+.profile-image img {
+    max-width: 96px!important;
+    max-height: 96px!important;
+}
+.radio {
+    margin-left: 2em;
+}
+.radio >input {
+    height: 1.5em;
+    width: 1.5em;
+}
+.radio >label {
+    font-size: 1.0em;
+}
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.nav-orders i {
+    font-size: 20px;
+}
+color: #ff0000;
+.color-red {
+}
+.color-orange {
+    color: #ff8000;
+}
+.color-yellow {
+    color: #ffff00;
+}
+.color-green {
+    color: #00ff00;
+}
+.error {
+  position: relative;
+  z-index: 1;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  margin-top: 15px;
+  /*width: 23px;*/
+  text-align: center;
+  font-size: 12px;
+  background: rgba(255, 0, 0, 0.6);
+  border: 0;
+}
+
+.error::after {
+    content: '';
+    border-bottom: 15px solid rgba(255, 0, 0, 0.6);
+    border-right: 15px solid transparent;
+    border-left: 15px solid transparent;
+    position: absolute;
+    left: 45%;
+    top: -14.5px;
+}
