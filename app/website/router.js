@@ -5,5 +5,6 @@
      filtros: require('./controllers/filtros'),
      filetree: require('./controllers/filetree'),
      login:require('./controllers/login'),
-     zipandmail:require('./controllers/zipandmail')
+     zipandmail:require('./controllers/zipandmail'),
+     correoRH:require('./controllers/correoRH'),
  }

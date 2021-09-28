@@ -25,6 +25,7 @@
         openCloseNav()
         $scope.getEmpresa(1);
         $scope.getTipoNomina();
+        $scope.getAnios();
         setInterval(function() { $scope.getPermisos(); }, 1500);
     }
 
@@ -276,4 +277,216 @@
     //Test: Print the IP addresses into the console
     
     ////////////////////////
+
+
+
+
+    $scope.getAnios = function () {
+        let fechaActual = new Date();
+        let anioActual = fechaActual.getFullYear();
+        let mesActual = fechaActual.getMonth() + 1;
+    
+        filtrosRepository.getYear(1).then(function (result) {
+          if (result.data.length > 0) {
+            //$scope.lstAnios = result.data;
+            $scope.lstAnios = [
+                {yearNomina: 2018},
+                {yearNomina: 2019},
+                {yearNomina: 2020},
+                {yearNomina: 2021}
+            ];
+            $scope.lstMeses = [
+              { id: 1, text: "Enero" },
+              { id: 2, text: "Febrero" },
+              { id: 3, text: "Marzo" },
+              { id: 4, text: "Abril" },
+              { id: 5, text: "Mayo" },
+              { id: 6, text: "Junio" },
+              { id: 7, text: "Julio" },
+              { id: 8, text: "Agosto" },
+              { id: 9, text: "Septiembre" },
+              { id: 10, text: "Octubre" },
+              { id: 11, text: "Noviembre" },
+              { id: 12, text: "Diciembre" },
+            ];
+    
+            $scope.lstQuincenas = [];
+    
+            /**
+             * SELECCIONAMOS EL AÑO ACTUAL
+             */
+            $scope.lstAnios.forEach((el) => {
+              if (el.yearNomina === anioActual) {
+                $scope.selectedAnio = el;
+              }
+            });
+    
+            /**
+             * SELECCIONAMOS EL MES ACTUAL
+             */
+            $scope.lstMeses.forEach((el) => {
+              if (el.id === mesActual) {
+                $scope.selectedMes = el.id;
+              }
+            });
+    
+            $scope.ObtieneFechasPagas();
+          }
+        });
+      };
+    
+      $scope.ObtieneFechasPagas = function () {
+        if (
+          isNaN($scope.selectedMes) === false &&
+          isNaN($scope.selectedAnio.yearNomina) === false
+        ) {
+          $scope.verDetalle = false;
+          filtrosRepository
+            .FechasPagas($scope.selectedMes, $scope.selectedAnio.yearNomina)
+            .then((resp) => {
+              if (resp.data.length > 0) {
+                $scope.lstQuincenas = resp.data;
+              }
+            });
+        }
+      };
+    
+    //  $scope.consultaTimbresEmpresa = function () {
+    //    alertFactory.warning('Buscando...')
+    //      $scope.verDetalle = false;
+    //      $scope.ltsTimbrado = [];
+    //      $scope.empresaUsuario.forEach((emp) => {
+    //        console.log(emp);
+    //        filetreeRepository.getFiles(emp.idEmpresa, $scope.fechaPagaSelected.tipo,$scope.fechaPagaSelected.fechasPaga).then(function(result) {
+    //            if (result.data != undefined) {
+    //                console.log('Es el valor del data de getfiletree');
+    //                console.log(result.data);
+    //                $scope.ltsTimbrado.push(result.data);
+    //                $scope.yo = true;
+    //            }
+    //        });
+    //      });
+    //  };
+    
+      $scope.consultaTimbresEmpresa =async function () {
+        alertFactory.warning('Buscando...')
+        $('#mdlLoading').modal('show');
+        $scope.buscando = true;
+        $scope.verGrid = false;
+          $scope.ltsTimbradoEmpresa = [];
+          $scope.ltsTimbradoSucursal = [];
+          $scope.data = {
+            'empresa': '',
+            'sucursal': '',
+            'numero':'' ,
+            'datos': []
+        };
+          var consulta  = [];
+          for (var i = 0; i < $scope.empresaUsuario.length; i++) {
+            consulta = await promiseConsultaCarpeta($scope.empresaUsuario[i].idEmpresa, $scope.fechaPagaSelected.tipo,$scope.fechaPagaSelected.fechasPaga);          
+            if(consulta.length > 0)
+            {
+                $scope.data = {
+                    'empresa': '',
+                    'sucursal': '',
+                    'numero':'' ,
+                    'datos': []
+                };
+                $scope.data.empresa = $scope.empresaUsuario[i].nombreEmpresa;
+                $scope.data.sucursal = [];
+                $scope.data.numero = consulta[0].datos.children.length;
+                $scope.data.datos = consulta[0].datos.children;
+                $scope.ltsTimbradoEmpresa.push($scope.data);
+            } 
+        }
+        var archivos = [];
+        var nombre = '';
+        var empresa = '';
+        var consultaRFC  = [];
+        $scope.datosSuc = [];
+        for (var i = 0; i < $scope.ltsTimbradoEmpresa.length; i++) {
+            archivos = $scope.ltsTimbradoEmpresa[i].datos;
+            empresa = $scope.ltsTimbradoEmpresa[i].empresa;
+            for (var j = 0; j < archivos.length; j++) {
+                console.log(j);
+                $scope.dataSuc = {
+                    'empresa': '',
+                    'sucursal': [],
+                    'dato': []
+                };
+                if(archivos[j].extension == '.xml')
+                {
+                nombre = archivos[j].name.substring(1,14);
+                console.log(nombre);
+                consultaRFC = await promiseConsultaLugar(nombre);     
+                console.log(consultaRFC[0]);   
+                $scope.dataSuc.empresa = empresa;
+                $scope.dataSuc.sucursal = consultaRFC[0].lugar;
+                $scope.dataSuc.dato =consultaRFC[0];
+                $scope.datosSuc.push($scope.dataSuc);
+            }
+            }
+             
+        }
+        var groupedValido = groupBy($scope.datosSuc, "sucursal");
+        for (var idxValido in groupedValido) {
+            var x = groupedValido[idxValido];
+            var sucs= {
+                'check': '',
+                'empresa': '',
+                'sucursal': '',
+                'cantidad':''
+            };
+            sucs.check = true;
+            sucs.empresa = x[0].empresa;
+            sucs.sucursal = idxValido;
+            sucs.cantidad = x.length;
+            $scope.ltsTimbradoSucursal.push(sucs);
+        }
+        $('#mdlLoading').modal('hide');
+        alertFactory.warning('Termino la busqueda...')
+        console.log($scope.ltsTimbradoSucursal);
+        console.log($scope.ltsTimbradoEmpresa);
+        $scope.buscando = false;
+        if($scope.ltsTimbradoSucursal.length > 0)
+        {
+            $scope.verGrid = true;
+        }
+      };
+    
+      async function promiseConsultaCarpeta(idEmpresa, tipo, fechasPaga) {
+        return new Promise((resolve, reject) => {
+            filetreeRepository.getFiles(idEmpresa, tipo, fechasPaga).then(function (result) {
+                if (result.data) {
+                    resolve(result.data);
+                }
+      
+            }).catch(err => {
+                reject(false);
+            });
+    
+        });
+    }
+    
+    async function promiseConsultaLugar(rfc) {
+        return new Promise((resolve, reject) => {
+            filtrosRepository.getLugarTrabajo(rfc).then(function (result) {
+                if (result.data) {
+                    resolve(result.data);
+                }
+      
+            }).catch(err => {
+                reject(false);
+            });
+    
+        });
+    }
+    
+    groupBy = function (xs, key) {
+        return xs.reduce(function (rv, x) {
+            (rv[x[key]] = rv[x[key]] || []).push(x);
+            return rv;
+        }, {});
+    };
+    
 });

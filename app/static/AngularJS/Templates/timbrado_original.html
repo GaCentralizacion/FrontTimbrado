@@ -1,0 +1,81 @@
+<div ng-init="init()">
+    <div id="page-title">
+        <!-- <div id="page-content">
+            <div class="panel"> -->
+        <div class="ibox float-e-margins">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Empresa:</label>
+                            <select class="form-control" ng-model="tipoEmpresa.idTipoEmpresa" ng-options="empresa.idEmpresa as empresa.nombreEmpresa for empresa in empresaUsuario" name="txtTipoContrato" ng-change="cargaDocTipoContrato(nuevoContrato)" ng-disabled="timbradoPendiente">
+                                <option value="">Seleccioné Empresa</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Tipo Nómina:</label>
+                            <select class="form-control" ng-model="tipoNomina.idTipoNomina" ng-options="tipoNomina.idTipoNomina as tipoNomina.nomTipoNomina for tipoNomina in tipoNomina" name="txtTipoContrato" ng-change="cargaDocTipoContrato(nuevoContrato)" ng-click="getFileTree(tipoEmpresa.idTipoEmpresa,tipoNomina.idTipoNomina)" ng-disabled="timbradoPendiente">
+                                <option value="">Seleccioné Tipo Nómina</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Árbol de carpetas
+                    </div>
+                    <div class="panel-body" ng-show="yo" ng-disabled="timbradoPendiente">
+                        <ul ng-repeat="filetreed in filetree" style="background-color:white;" id="menu_arbol">
+                            <li id="padre" style="display: block; text-decoration: none;" ><a style="cursor:pointer; color:black" ng-click="seleccionarTimbre(filetreed.datos);ruta(filetreed.datos)"><span class="glyphicon glyphicon-folder-open"></span>  {{filetreed.datos.name}}</a>
+                                <ul id="{{filetreed.datos.name}}" ng-repeat="filetreechildren in filetreed.datos.children" style="background-color:white">
+                                    <li id="{{filetreed.datos.name}}" style="display: block; text-decoration: none;">
+                                        <a style="cursor:pointer; color:black" ng-click="seleccionarTimbre(filetreed.datos)"><span class=" glyphicon glyphicon-list-alt "></span>  {{filetreechildren.name}}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                  
+                    <div style="margin-left: 55%; margin-bottom:15px" ng-show="timbrar" >
+                        Carpeta Seleccionada: {{directorio}}  <button class="btn" style="background: #F66B06; border-color:#F66B06; color:white" ng-click="realizarTimbrado()" ng-disabled="timbradoPendientes">{{cambioNombre}}</button>
+                    </div>
+                     <div style="color:white; margin-left: 10px" ng-show="timbrar" >.</div> 
+                </div>
+            </div>
+<!--             <div class="col-lg-1 "></div>
+ -->        <div class="col-lg-4 ">
+               <div class="panel " ng-show="procesando " style="border-color:#004E8C ">
+                    <div class="panel-heading " style="background: #004E8C;color: white ">
+                            {{mensajePanel}}
+                    </div>
+                        <div class="panel-body ">
+                            <label>Empresa: </label> {{NombreEmpresa}}<br/> 
+                            <label>Periodo: </label> {{NombreNomina}}
+                            <div class="progress progress-striped active " ng-show="mostrarEstado == true">
+                                <div style="width: {{porcentaje}}% " aria-valuemax="100 " aria-valuemin="0 " aria-valuenow="75 " role="progressbar " class="progress-bar progress-bar-sucess ">
+                                    <span class="sr-only "></span> {{porcentaje | number:2}}%
+                                </div>
+                            </div>
+                            <div ng-show="mostrarEstado == false">Timbrado Terminado </div>
+                            <div ng-show="mostrarEstado == true">{{datosPendientes[0].timbrados + datosPendientes[0].timbradoError}} <label> xml de  </label> {{documentosTotales}} </div><br/>
+                            <label>Tipo de Nomina:</label> {{TipoDescripcion}} <br/>
+                            <!-- <label>Tiempo transcurrido: </label> <span id="minutos">0</span>:<span id="segundos">0</span><br/> -->
+                            <label>Documentos timbrados: </label> {{DocumentosAceptados}}<br/>
+                            <label>Documentos no timbrados: </label> {{documentosErroneos}}
+                        </div>
+                </div>
+<!-- <span id="minutos">0</span>:<span id="segundos">0</span><br/> -->
+            </div>
+           <div class="panel-body col-lg-6" >
+                <ul ng-repeat="listDocumentosRepetidos in listDocumentosRepetidos">
+                    <li>{{listDocumentosRepetidos.nombreDocumentoR}} documentos timbrados</li>
+                </ul>
+           </div>
+        </div>
+    </div>
+    <!-- /div>
+    </div> -->
+</div>

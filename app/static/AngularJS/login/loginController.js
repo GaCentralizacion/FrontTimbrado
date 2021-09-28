@@ -22,6 +22,7 @@ registrationModule.controller('loginController', function($scope, $rootScope, $l
                         $rootScope.menuCancelar = true;
                         $rootScope.menuConciliacion = true;
                         $rootScope.menuDesbloqueo = true;
+                        $rootScope.menuCorreo = true;
                     }
                     $location.url('/timbrado' + $rootScope.datosUsuario[0].idPerfil + '&'+ $rootScope.datosUsuario[0].idUsuario);
                 } else if ($rootScope.datosUsuario[0].idPerfil == 2) {

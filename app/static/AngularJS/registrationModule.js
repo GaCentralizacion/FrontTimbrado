@@ -37,6 +37,12 @@ var registrationModule = angular.module("registrationModule", ["ngRoute", "Local
             controller: 'desbloqueoController'
         });
 
+        $routeProvider.when('/correoRH:idPerfil&:idUsuario', {
+            templateUrl: 'AngularJS/Templates/correoRH.html', //example 1
+            controller: 'correoRHController'
+        });
+
+
         $routeProvider.otherwise({redirectTo:'/'});
 
         $locationProvider.html5Mode({

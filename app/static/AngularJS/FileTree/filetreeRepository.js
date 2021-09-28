@@ -124,6 +124,22 @@ registrationModule.factory('filetreeRepository', function($http) {
                 }
             });
             console.log(objectArchivos)
-        }
+        },
+        getFiles: function(idEmpresa,idTipo, fechasPaga){
+            console.log('Ruta'+ filetreeURL + 'files/');
+            console.log('idEmpresa'+ idEmpresa + ' idTipo: '+ idTipo + 'fechasPaga: '+ fechasPaga) ;
+            return $http({
+                url: filetreeURL + 'filesXEmpresa/',
+                method:"GET",
+                 params: {
+                    idEmpresa: idEmpresa,
+                    idTipo:idTipo,
+                    fechasPaga:fechasPaga
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
     };
 });

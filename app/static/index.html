@@ -42,12 +42,19 @@
                 <br/>
             </div>
         </div>
-        <a href="/timbrado{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="Timbrado" style="font-family:Helvetica;" ng-show="menuTimbrado">
+     <!--   <a href="/timbrado{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="Timbrado" style="font-family:Helvetica;" ng-show="menuTimbrado">
             <i class="glyphicon glyphicon-list-alt"></i>
             <span class="menu-title">
                 <strong>Timbrado</strong>
             </span>
         </a>
+    -->
+    <a href="/timbrado{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="TimbradoMasivo" style="font-family:Helvetica;" ng-show="menuTimbrado">
+        <i class="glyphicon glyphicon-list-alt"></i>
+        <span class="menu-title">
+            <strong>Timbrado Masivo</strong>
+        </span>
+    </a>
         <a href="/busqueda{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="TimbradoBusqueda" style="font-family:Helvetica;" ng-show="menuBusqueda">
             <i class="glyphicon glyphicon-search"></i>
             <span class="menu-title">
@@ -125,6 +132,8 @@
     <script src="AngularJS/FileTree/filetreeRepository.js"></script>
     <script src="AngularJS/login/loginController.js"></script>
     <script src="AngularJS/login/loginRepository.js"></script>
+    <script src="AngularJS/correoRH/correoRHController.js"></script>
+    <script src="AngularJS/correoRH/correoRHRepository.js"></script>
 </body>
 
 </html>

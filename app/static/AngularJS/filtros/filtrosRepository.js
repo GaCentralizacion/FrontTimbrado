@@ -288,6 +288,32 @@ registrationModule.factory('filtrosRepository', function($http) {
                     'Content-Type': 'application/json'
                 }
             });
-        }   
+        },
+        FechasPagas: function(  mes,anio ) {
+            return $http({
+                url: filtroURL + 'fechasPagas/',
+                method: "GET",
+                params: {
+                    mes: mes,
+                    anio: anio
+
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        }, 
+        getLugarTrabajo: function(rfc) {
+            return $http({
+                url: filtroURL + 'buscaLugarTrabajo/',
+                method: "GET",
+                params: {
+                    rfc: rfc
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },       
     };
 });

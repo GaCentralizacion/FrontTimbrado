@@ -1,10 +1,10 @@
 {
     "port": 3900,
     "socketProt": 3100,
-    "dirSocket": "192.168.20.59",
+    "dirSocket": "192.168.20.92",
 	"SQL_user": "sa",
     "SQL_password": "S0p0rt3",
-    "SQL_server": "192.168.20.59",
+    "SQL_server": "192.168.20.92",
     "SQL_database": "GA_NOMINA",
     "SQL_connectionTimeout": 300000,
     "SQL_requestTimeout": 300000,

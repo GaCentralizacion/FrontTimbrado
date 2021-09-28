@@ -335,4 +335,35 @@ Filtros.prototype.get_LlenaM4 = function (req, res, next) {
     });
 };
 
+
+
+Filtros.prototype.get_FechasPagas = function (req, res, next) {
+
+    var self = this;
+
+    var params = [{name: 'mes',value: req.query.mes ,type: self.model.types.INT},
+    {name: 'anio',value: req.query.anio ,type: self.model.types.INT}];
+
+    this.model.query('SEL_FECHAS_PAGA_SP', params, function (error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
+Filtros.prototype.get_buscaLugarTrabajo = function (req, res, next) {
+
+    var self = this;
+
+    var params = [ {name: 'rfc',value: req.query.rfc ,type: self.model.types.STRING}];
+
+    this.model.query('SEL_LUGARTRABAJO_RFC_SP', params, function (error, result) {
+        self.view.expositor(res, {
+            error: error,
+            result: result
+        });
+    });
+};
+
 module.exports = Filtros;
