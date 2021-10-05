@@ -50,11 +50,25 @@ registrationModule.controller('correoRHController', function($scope, $rootScope,
     $scope.ModalCorreos = function (correo)
     {
         $scope.detalleCorreo = correo;
+        $scope.correoModal = correo.correo;
         $('#modalCorreo').modal('show');
     }
 
     $scope.actualizarCorreo = function(){
         $('#mdlLoading').modal('show');
+        var dominio = '@grupoandrade.com'
+        var correoValido = $scope.correoModal.includes(dominio);
+        if($scope.correoModal == undefined || $scope.correoModal == '')
+        {
+            alertFactory.warning('El correo no puede ser vacio');
+        }
+        else if(!correoValido)
+        {
+            alertFactory.warning('El correo no pertenece al grupo');
+        }
+        else
+        {
+        $scope.detalleCorreo.correo =  $scope.correoModal;
         correoRHRepository.actualizarCorreo($scope.detalleCorreo.idLugar,$scope.detalleCorreo.correo).then(function (result) {
             if (result.data[0].estatus == 1 ) {  
                 $scope.getCorreosRH();
@@ -68,8 +82,8 @@ registrationModule.controller('correoRHController', function($scope, $rootScope,
                 alertFactory.warning('Ocurrio un error al actualizar.');
             }
     
-    });
-    
+            });
+        }
     }
 
 

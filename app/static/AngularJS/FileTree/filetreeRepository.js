@@ -141,5 +141,26 @@ registrationModule.factory('filetreeRepository', function($http) {
                 }
             });
         },
+        postDocumentosMailTimbrados: function(idEmpresa,idTipo,idUsuario,path,nombreCarpeta,listaPds,correo,sucursal){
+            var objectArchivos ={
+                archivos:listaPds,
+                idEmpresa: idEmpresa,
+                idTipo: idTipo,
+                idUsuario: idUsuario,
+                path: path,
+                nombreCarpeta: nombreCarpeta,
+                correo:correo,
+                sucursal:sucursal
+            }
+            return $http({
+                url:mailPdfs + 'generaZipMailTimbrado/',
+                method: "POST",
+                data: objectArchivos,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log(objectArchivos)
+        },
     };
 });

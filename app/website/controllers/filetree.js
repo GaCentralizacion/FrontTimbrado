@@ -36,8 +36,8 @@ FileTree.prototype.get_socket = function(req, res, next) {
                                 });
     console.log('envio: ');
     console.log(envio);
-    //client.connect(3800, 'Localhost', function() {
-    client.connect(3800, '192.168.20.59', function() {
+    client.connect(3800, 'Localhost', function() {
+    //client.connect(3800, '192.168.20.59', function() {
     //client.connect(3800, '192.168.20.92', function() {
         console.log('Connected');
         client.write(envio);
@@ -68,7 +68,8 @@ FileTree.prototype.get_files = function(req, res, next) {
 
     this.model.query('SEL_RUTAS_ORIGEN_SP', params, function(error, result) {
         console.log('ruta: ' + result[0].RutaDescripcion);
-        var trees = dirTree(result[0].RutaDescripcion, ['.xml']);
+        var trees = dirTree(result[0].RutaDescripcion.replace("F", "C"), ['.xml']);
+        //var trees = dirTree(result[0].RutaDescripcion, ['.xml']);
         var elementos = [];
         var elementosValidos = [];
         var elementosFinales = [];

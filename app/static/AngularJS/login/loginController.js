@@ -4,6 +4,7 @@ registrationModule.controller('loginController', function($scope, $rootScope, $l
     $rootScope.menuBusqueda = false;
     $rootScope.menuCancela = false;
     $rootScope.menuDesbloqueo = false;
+    $rootScope.menuTimbradoMasivo = false;
     $scope.init = function() {
         $rootScope.mostrarMenu = false;
         closeNav();
@@ -17,6 +18,7 @@ registrationModule.controller('loginController', function($scope, $rootScope, $l
                 if ($rootScope.datosUsuario[0].idPerfil == 1) {
                     $rootScope.menuTimbrado = true;
                     $rootScope.menuBusqueda = true;
+                    $rootScope.menuTimbradoMasivo = true;
                    
                     if ($rootScope.datosUsuario[0].idUsuario == 15||$rootScope.datosUsuario[0].idUsuario == 17 ||$rootScope.datosUsuario[0].idUsuario == 18 ||$rootScope.datosUsuario[0].idUsuario == 20 ) {
                         $rootScope.menuCancelar = true;
@@ -27,6 +29,7 @@ registrationModule.controller('loginController', function($scope, $rootScope, $l
                     $location.url('/timbrado' + $rootScope.datosUsuario[0].idPerfil + '&'+ $rootScope.datosUsuario[0].idUsuario);
                 } else if ($rootScope.datosUsuario[0].idPerfil == 2) {
                     $rootScope.menuTimbrado = true;
+                    $rootScope.menuTimbradoMasivo = true;
                     $location.url('/timbrado' + $rootScope.datosUsuario[0].idPerfil+ '&'+ $rootScope.datosUsuario[0].idUsuario );
                 } else if ($rootScope.datosUsuario[0].idPerfil == 3) {
                     $rootScope.menuBusqueda = true;

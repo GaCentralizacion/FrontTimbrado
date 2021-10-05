@@ -20,6 +20,10 @@ var registrationModule = angular.module("registrationModule", ["ngRoute", "Local
             templateUrl: 'AngularJS/Templates/timbrado.html', //example 1
             controller: 'timbradoController'
         });
+        $routeProvider.when('/timMasivo:idPerfil&:idUsuario', {
+            templateUrl: 'AngularJS/Templates/timbradoMasivo.html', //example 1
+            controller: 'timbradoMasivoController'
+        });
         $routeProvider.when('/busqueda:idPerfil&:idUsuario', {
             templateUrl: 'AngularJS/Templates/busqueda.html', //example 1
             controller: 'busquedaController'

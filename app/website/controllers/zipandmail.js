@@ -54,7 +54,7 @@ console.log(req.body)//Objeto que almacena la respuesta
         var contentPromise = new JSZip.external.Promise(function(resolve, reject) {
             fs.readFile(file, function(err, data) {
                 if (err) {
-                    reject(e);
+                    reject(err);
                 } else {
                     resolve(data);
                 }
@@ -90,8 +90,8 @@ console.log(req.body)//Objeto que almacena la respuesta
     var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'timbrado.andrade@gmail.com',
-                pass: 'S1ST3M4S'
+                user: 'reportesauxiliar@grupoandrade.com',
+                pass: 'SuuDU3%56pl#'
             }
         });
 
@@ -152,5 +152,96 @@ console.log(req.body)//Objeto que almacena la respuesta
     
 }
 
+ZipandMail.prototype.post_generaZipMailTimbrado = function(req, res, next) {  
+    console.log(req.body)//Objeto que almacena la respuesta
+          
+        var object = {};   //Objeto que envía los parámetros
+        var params = [];   //Referencia a la clase para callback
+        var self = this;
+        var nombreArchivos = [];
+        var files = [];
+        var ruta = req.body.path;
+        var extension = '.pdf';
+        var carpeta = req.body.nombreCarpeta;
+        var correo = req.body.correo;
+        nombreArchivos = req.body.archivos; 
+        var sucursal = req.body.sucursal;
+        var erroresPDF = 0;
+        var archivosTotales = req.body.archivos.length;
+
+        nombreArchivos.forEach(function(file, i) {
+            create_zip(ruta + file.nombreRecibo + extension, file.nombreRecibo + extension);
+        }); 
+
+        function create_zip(file, name) {
+            var contentPromise = new JSZip.external.Promise(function(resolve, reject) {
+                fs.readFile(file, function(err, data) {
+                    if (err) {
+                        erroresPDF = erroresPDF + 1;
+                        //reject(err);
+                    } else {
+                        resolve(data);
+                    }
+                });
+            });
+            zip.file(name, contentPromise);
+        }
+    
+        zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
+            .pipe(fs.createWriteStream(ruta + carpeta + '.zip'))
+            .on('finish', function() {
+                console.log(ruta + carpeta + '.zip' + "written.");
+            });
+        zip = new JSZip();
+        var nodemailer = require('nodemailer');
+        var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'reportesauxiliar@grupoandrade.com',
+                    pass: 'SuuDU3%56pl#'
+                }
+            });
+        var mailOptions = {
+            from: '"Correos de GA" <grupoandrade.reportes@grupoandrade.com.mx>', // sender address 
+            to: correo, // list of receivers 
+            subject: 'Recibos Timbrados ' + sucursal, // Subject line 
+            text: 'Se envían adjuntos los archivos timbrados ', // plaintext body 
+            html: '<b>Se envían adjuntos los archivos timbrados </b>', // html body 
+            attachments: [{ // file on disk as an attachment
+                filename: +carpeta + '.zip',
+                path: ruta + carpeta + '.zip' // stream this file
+            }]
+        };
+    
+        transporter.sendMail(mailOptions, function(error, info) {
+    
+            if (error) {
+                res.send(500);
+                console.log(error);
+            } else {
+                res.send(200);
+                console.log('Message sent: ' + info.response);
+    
+                fs.stat(ruta + carpeta + '.zip', function(err, stats) {
+    
+                if (err) {
+                    return console.error(err);
+                }
+    
+                      
+                });
+            }
+    
+                   
+        });
+    
+        transporter.close;
+        object.error = null;            
+        object.result = 1; 
+        console.log(object.result)
+        req.body = []; 
+      
+        
+    }
 
 module.exports = ZipandMail;

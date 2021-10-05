@@ -346,7 +346,7 @@
 
     $scope.enviarCorreo = function(listaDocumentos, correo) {
         $scope.correo = correo;
-        $scope.rutaCarpeta = "C:/Nomina_Timbrado/Timbrados/" + listaDocumentos[0].descripcionNomina + '/' + listaDocumentos[0].ClaveTimbrado + "/" + $scope.nombre + '/'
+        $scope.rutaCarpeta = "C:/Timbrado_Nomina/Timbrados/" + listaDocumentos[0].descripcionNomina + '/' + listaDocumentos[0].ClaveTimbrado + "/" + $scope.nombre + '/'
         $scope.contadorSel = 0;
         angular.forEach(listaDocumentos, function(value, key) {
             if (value.check == true) {

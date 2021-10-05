@@ -42,19 +42,12 @@
                 <br/>
             </div>
         </div>
-     <!--   <a href="/timbrado{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="Timbrado" style="font-family:Helvetica;" ng-show="menuTimbrado">
+    <a href="/timbrado{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="Timbrado" style="font-family:Helvetica;" ng-show="menuTimbrado">
             <i class="glyphicon glyphicon-list-alt"></i>
             <span class="menu-title">
                 <strong>Timbrado</strong>
             </span>
         </a>
-    -->
-    <a href="/timbrado{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="TimbradoMasivo" style="font-family:Helvetica;" ng-show="menuTimbrado">
-        <i class="glyphicon glyphicon-list-alt"></i>
-        <span class="menu-title">
-            <strong>Timbrado Masivo</strong>
-        </span>
-    </a>
         <a href="/busqueda{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="TimbradoBusqueda" style="font-family:Helvetica;" ng-show="menuBusqueda">
             <i class="glyphicon glyphicon-search"></i>
             <span class="menu-title">
@@ -77,6 +70,18 @@
             <i class="glyphicon glyphicon-ban-circle"></i>
             <span class="menu-title">
                 <strong>Desbloqueo</strong>
+            </span>
+        </a>
+        <a href="/timMasivo{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="TimbradoMasivo" style="font-family:Helvetica;" ng-show="menuTimbradoMasivo">
+            <i class="glyphicon glyphicon-list-alt"></i>
+            <span class="menu-title">
+                <strong>Timbrado Masivo</strong>
+            </span>
+        </a>
+        <a href="/correoRH{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="Correos RH" style="font-family:Helvetica;" ng-show="menuCorreo">
+            <i class="glyphicon glyphicon-envelope"></i>
+            <span class="menu-title">
+                <strong>Correos RH</strong>
             </span>
         </a>
     </div>
@@ -134,6 +139,7 @@
     <script src="AngularJS/login/loginRepository.js"></script>
     <script src="AngularJS/correoRH/correoRHController.js"></script>
     <script src="AngularJS/correoRH/correoRHRepository.js"></script>
+    <script src="AngularJS/TimbradoMasivo/timbadoMasivoController.js"></script>
 </body>
 
 </html>
