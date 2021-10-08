@@ -162,6 +162,7 @@ ZipandMail.prototype.post_generaZipMailTimbrado = function(req, res, next) { 
         var files = [];
         var ruta = req.body.path;
         var extension = '.pdf';
+        var extensionXML = '.xml';
         var carpeta = req.body.nombreCarpeta;
         var correo = req.body.correo;
         nombreArchivos = req.body.archivos; 
@@ -171,6 +172,10 @@ ZipandMail.prototype.post_generaZipMailTimbrado = function(req, res, next) { 
 
         nombreArchivos.forEach(function(file, i) {
             create_zip(ruta + file.nombreRecibo + extension, file.nombreRecibo + extension);
+        }); 
+
+        nombreArchivos.forEach(function(file, i) {
+            create_zip(ruta + file.nombreRecibo +'tim'+ extensionXML, file.nombreRecibo +'tim'+ extensionXML);
         }); 
 
         function create_zip(file, name) {

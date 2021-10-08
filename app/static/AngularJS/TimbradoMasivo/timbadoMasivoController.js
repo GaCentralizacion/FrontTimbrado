@@ -353,6 +353,10 @@ registrationModule.controller('timbradoMasivoController', function($scope, $root
               if (resp.data.length > 0) {
                 $scope.lstQuincenas = resp.data;
               }
+              else
+              {
+                $scope.lstQuincenas = [];
+              }
             });
         }
       };
@@ -575,7 +579,7 @@ registrationModule.controller('timbradoMasivoController', function($scope, $root
         }
         alertFactory.warning('Termino Timbrado Masivo, inicia envio correos...')
         $scope.bloqueoCorreo = false;
-        $scope.Correo();
+        //$scope.Correo();
         //console.log(timMasivo);
       }
 
@@ -664,7 +668,12 @@ registrationModule.controller('timbradoMasivoController', function($scope, $root
                     //$scope.getPermisos();
                   }  
             }  
-            await resolveAfter2Seconds();
+            await resolveAfter8Seconds();
+            var correo = '';
+            for (var i = 0; i < $scope.ltsSucTimbrado.length; i++) {
+                if($scope.ltsSucTimbrado[i].idEmpresa == lista.idEmpresa)
+                {correo = await promiseEnviarCorreo($scope.ltsSucTimbrado[i]);}      
+            }    
             resolve(resultado);
 
         }).catch(err => {
@@ -710,14 +719,14 @@ registrationModule.controller('timbradoMasivoController', function($scope, $root
         return new Promise(resolve => {
           setTimeout(() => {
             resolve('resolved');
-          }, 6000);
+          }, 9000);
         });
       }
-      function resolveAfter2Seconds() {
+      function resolveAfter4Seconds() {
         return new Promise(resolve => {
           setTimeout(() => {
             resolve('resolved');
-          }, 2000);
+          }, 4000);
         });
       }
 

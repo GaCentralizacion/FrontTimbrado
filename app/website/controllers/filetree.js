@@ -46,11 +46,15 @@ FileTree.prototype.get_socket = function(req, res, next) {
     client.on('data', function(data) {
         console.log('Received: ' + data);
         datos = data.toString('utf8');
-
+    try{
         res.json({
         data: datos
         });
         client.destroy(); // kill client after server's response 
+    }
+    catch(err) {
+        console.log(err.message);
+    }
     });
 
 
