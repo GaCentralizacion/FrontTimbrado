@@ -1,4 +1,4 @@
-registrationModule.controller('timbradoMasivoController', function($scope, $rootScope, $routeParams, alertFactory, timbradoRepository, localStorageService, filtrosRepository, filetreeRepository) {
+registrationModule.controller('timbradoMasivoController', function($scope, $rootScope, $routeParams, alertFactory, timbradoRepository, localStorageService, filtrosRepository, filetreeRepository,usuariosRFCRepository) {
     $rootScope.mostrarMenu = true;
     $scope.idUsuario = $routeParams.idUsuario
     $scope.procesando = false;
@@ -28,6 +28,7 @@ registrationModule.controller('timbradoMasivoController', function($scope, $root
         $scope.getEmpresa(1);
         $scope.getTipoNomina();
         $scope.getAnios();
+        $scope.getUsuariosRFC();
         setInterval(function() { $scope.getPermisos(); }, 1500);
         //$scope.getPermisos();
     }
@@ -40,6 +41,14 @@ registrationModule.controller('timbradoMasivoController', function($scope, $root
             }
         });
     }
+
+    $scope.getUsuariosRFC = function(idUsuario) {
+        usuariosRFCRepository.getUsuariosRFC().then(function(result) {
+            $scope.sucursalRFC = result.data;
+        });
+    }
+
+
 
     $scope.getTipoNomina = function() {
         $scope.cambioNombre = 'Timbrar'
@@ -505,33 +514,33 @@ registrationModule.controller('timbradoMasivoController', function($scope, $root
 };
 
       $scope.Correo =async function () {
-        //$scope.ltsSucTimbrado = [];
-        //$scope.ltsEmpTimbrado= [];
-        //$scope.ltsTimbradoSucursal.forEach(function(suc) {
-        //    if(suc.check == true)
-        //    {$scope.ltsSucTimbrado.push(suc);}   
-        //});
-        //var groupedEmpresa = groupBy($scope.ltsSucTimbrado, "empresa");
-        //for (var idxValido in groupedEmpresa) {
-        //    var x = groupedEmpresa[idxValido];
-        //    var det= {
-        //        'idEmpresa':0,
-        //        'empresa': '',
-        //        'sucursales': '',
-        //        'rutaTimbrar': '', 
-        //        //'cantidad':''
-        //    };
-        //    det.idEmpresa = x[0].idEmpresa;
-        //    det.empresa = idxValido;
-        //    det.sucursal = x;
-        //   //det.archivos = x;
-        //    det.rutaTimbrar = x[0].rutaTimbrar;
-        //    //det.cantidad = x.length;
-        //    $scope.ltsEmpTimbrado.push(det);
-        //}
+        $scope.ltsSucTimbrado = [];
+        $scope.ltsEmpTimbrado= [];
+        $scope.ltsTimbradoSucursal.forEach(function(suc) {
+            if(suc.check == true)
+            {$scope.ltsSucTimbrado.push(suc);}   
+        });
+        var groupedEmpresa = groupBy($scope.ltsSucTimbrado, "empresa");
+        for (var idxValido in groupedEmpresa) {
+            var x = groupedEmpresa[idxValido];
+            var det= {
+                'idEmpresa':0,
+                'empresa': '',
+                'sucursales': '',
+                'rutaTimbrar': '', 
+                //'cantidad':''
+            };
+            det.idEmpresa = x[0].idEmpresa;
+            det.empresa = idxValido;
+            det.sucursal = x;
+           //det.archivos = x;
+            det.rutaTimbrar = x[0].rutaTimbrar;
+            //det.cantidad = x.length;
+            $scope.ltsEmpTimbrado.push(det);
+        }
         var correo = '';
         for (var i = 0; i < $scope.ltsSucTimbrado.length; i++) {
-            correo = await promiseEnviarCorreo($scope.ltsSucTimbrado[i]);          
+            correo = await promiseEnviarCorreoPrueba($scope.ltsSucTimbrado[i]);          
         }
         alertFactory.warning('Termino envio correos...')
       }
@@ -577,7 +586,7 @@ registrationModule.controller('timbradoMasivoController', function($scope, $root
             //alert('termino timbrado')
             timMasivo.push(x);       
         }
-        alertFactory.warning('Termino Timbrado Masivo, inicia envio correos...')
+        alertFactory.warning('Termino Timbrado Masivo...')
         $scope.bloqueoCorreo = false;
         //$scope.Correo();
         //console.log(timMasivo);
@@ -591,11 +600,22 @@ registrationModule.controller('timbradoMasivoController', function($scope, $root
         var rutaPDF = lista.rutaTimbrar.replace("Origen", "Timbrados") +   '/';
         angular.forEach(lista.archivos, function(value, key) {
             //if (value.check == true) {
+                //$scope.listaPdfs.push({
+                //    nombreRecibo: value.nombre,
+                //    idTipoNomina: $scope.fechaPagaSelected.tipo,
+                //    nombreNomina: $scope.fechaPagaSelected.fechasPaga
+                //})
+                let rfcusuario = value.nombre.substring(1,14);
+                let validaRFC =  $scope.sucursalRFC.find( det => det.rfc === rfcusuario );
+                if(validaRFC == undefined)
+                {
                 $scope.listaPdfs.push({
                     nombreRecibo: value.nombre,
                     idTipoNomina: $scope.fechaPagaSelected.tipo,
                     nombreNomina: $scope.fechaPagaSelected.fechasPaga
                 })
+                }
+
                 $scope.contadorSel++;
             //}
         });
@@ -666,14 +686,16 @@ registrationModule.controller('timbradoMasivoController', function($scope, $root
                     //{break;}
                     //}
                     //$scope.getPermisos();
-                  }  
+                  }
+                  await resolveAfter8Seconds();
+                  var correo = '';
+                  for (var i = 0; i < $scope.ltsSucTimbrado.length; i++) {
+                      if($scope.ltsSucTimbrado[i].idEmpresa == lista.idEmpresa)
+                      {
+                          correo = await promiseEnviarCorreo($scope.ltsSucTimbrado[i]);
+                      }      
+                  }    
             }  
-            await resolveAfter8Seconds();
-            var correo = '';
-            for (var i = 0; i < $scope.ltsSucTimbrado.length; i++) {
-                if($scope.ltsSucTimbrado[i].idEmpresa == lista.idEmpresa)
-                {correo = await promiseEnviarCorreo($scope.ltsSucTimbrado[i]);}      
-            }    
             resolve(resultado);
 
         }).catch(err => {
@@ -719,7 +741,7 @@ registrationModule.controller('timbradoMasivoController', function($scope, $root
         return new Promise(resolve => {
           setTimeout(() => {
             resolve('resolved');
-          }, 9000);
+          }, 7000);
         });
       }
       function resolveAfter4Seconds() {
@@ -754,4 +776,38 @@ registrationModule.controller('timbradoMasivoController', function($scope, $root
           .html(percent+"%");   
       };
     
+      async function promiseEnviarCorreoPrueba(lista) {
+        return new Promise((resolve, reject) => {
+        $scope.correo = lista.archivos[0].dato.correo;
+        $scope.contadorSel = 0;
+        $scope.listaPdfs = [];
+        var rutaPDF = lista.rutaTimbrar.replace("Origen", "Timbrados") +   '/';
+        angular.forEach(lista.archivos, function(value, key) {
+            //if (value.check == true) {
+                let rfcusuario = value.nombre.substring(1,14);
+                let validaRFC =  $scope.sucursalRFC.find( det => det.rfc === rfcusuario );
+                if(validaRFC == undefined)
+                {
+                $scope.listaPdfs.push({
+                    nombreRecibo: value.nombre,
+                    idTipoNomina: $scope.fechaPagaSelected.tipo,
+                    nombreNomina: $scope.fechaPagaSelected.fechasPaga
+                })
+                }
+                $scope.contadorSel++;
+            //}
+        });
+        var x =  $scope.listaPdfs;
+
+        filetreeRepository.postDocumentosMailTimbrados(lista.idEmpresa, $scope.fechaPagaSelected.tipo, $scope.idUsuario, rutaPDF, $scope.fechaPagaSelected.fechasPaga, $scope.listaPdfs, $scope.correo, lista.sucursal).then(function(result) {
+            if (result.data) {
+                resolve(result.data);
+            }
+        }).catch(err => {
+          reject(false);
+        })
+
+     });
+    }
+
 });

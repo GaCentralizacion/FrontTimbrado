@@ -84,6 +84,12 @@
                 <strong>Correos RH</strong>
             </span>
         </a>
+        <a href="/usuariosRFC{{datosUsuario[0].idPerfil}}&{{datosUsuario[0].idUsuario}}" title="Usuarios RFC" style="font-family:Helvetica;" ng-show="menuCorreo">
+            <i class="glyphicon glyphicon-user"></i>
+            <span class="menu-title">
+                <strong>Usuarios RFC</strong>
+            </span>
+        </a>
     </div>
     <div id="pnlMain">
         <div class="panelTopBar"  ng-show="mostrarMenu">
@@ -140,6 +146,8 @@
     <script src="AngularJS/correoRH/correoRHController.js"></script>
     <script src="AngularJS/correoRH/correoRHRepository.js"></script>
     <script src="AngularJS/TimbradoMasivo/timbadoMasivoController.js"></script>
+    <script src="AngularJS/usuariosRFC/usuariosRFCController.js"></script>
+    <script src="AngularJS/usuariosRFC/usuariosRFCRepository.js"></script>
 </body>
 
 </html>

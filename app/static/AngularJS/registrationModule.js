@@ -46,6 +46,10 @@ var registrationModule = angular.module("registrationModule", ["ngRoute", "Local
             controller: 'correoRHController'
         });
 
+        $routeProvider.when('/usuariosRFC:idPerfil&:idUsuario', {
+            templateUrl: 'AngularJS/Templates/usuariosRFC.html', //example 1
+            controller: 'usuariosRFCController'
+        });
 
         $routeProvider.otherwise({redirectTo:'/'});
 
