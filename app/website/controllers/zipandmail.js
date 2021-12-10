@@ -100,7 +100,7 @@ console.log(req.body)//Objeto que almacena la respuesta
         from: '"Correos de GA" <grupoandrade.reportes@grupoandrade.com.mx>', // sender address 
         to: correo, // list of receivers 
         subject: 'Recibos Timbrados GA', // Subject line 
-        text: 'Se envían adjuntos los archivos timbrados', // plaintext body 
+        text: 'Se envían adjuntos los archivos timbrados ', // plaintext body 
         html: '<b>Se envían adjuntos los archivos timbrados </b>', // html body 
         attachments: [{ // file on disk as an attachment
             filename: +carpeta + '.zip',
